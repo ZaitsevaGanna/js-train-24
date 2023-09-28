@@ -1,7 +1,25 @@
+//const { request } = require("express");
+
 console.log("Завдання: 3 ==============================");
 
 // Створюємо функцію task3, в якій буде виконуватися завдання
 function task3() {
+  const promise1 = new Promise((resolve, reject) => {
+    setTimeout(resolve("Проміс 1 виконано"), 1000);
+  });
+
+  const promise2 = new Promise((resolve, reject) => {
+    setTimeout(reject("Проміс 2 відхилено"), 2000);
+  });
+
+  Promise.allSettled([promise1, promise2])
+    .then((value) => {
+      for (let i = 0; i < value.length; i++) {
+        console.log("Проміс", i + 1, value[i].status);
+      }
+    })
+    .finally(console.log(`Завдання 3 завершено`));
+
   // Створюємо функцію promise1, яка створює і повертає новий проміс
   // Метод new Promise приймає в якості параметра функцію (executor), яка має два параметри: resolve і reject.
   // Використовуємо setTimeout для імітації асинхронної операції, яка завершується через 1 секунду
@@ -18,6 +36,5 @@ function task3() {
   // Вона використовується для виконання дій, які повинні виконуватися незалежно від того, чи було проміс вирішено чи відхилено
   // В нашому випадку ми просто виводимо повідомлення, "Завдання 3 завершено"
 }
-
 // Викликаємо функцію task3
 task3();

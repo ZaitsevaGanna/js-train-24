@@ -1,7 +1,23 @@
+//const { response } = require("express");
+
 console.log("Завдання: 6 ==============================");
 
 // Створюємо функцію task6, яка використовує setImmediate та проміси.
 function task6() {
+  const promiseRez = new Promise((resolve, reject) => {
+    let index = Math.random();
+    setImmediate(() => {
+      if (index > 0.5) {
+        resolve(`Більше ніж 0.5`);
+        reject(`Менше ніж 0.5`);
+      }
+    });
+  });
+
+  promiseRez
+    .then((value) => console.log(`Проміс зарезолвився з значенням: ${value}`))
+    .catch((error) => console.error(`упс ...  ${error}`))
+    .finally(() => console.log("Проміс завершено"));
   // Створюємо новий проміс.
   // Використовуємо функцію setImmediate, щоб виконати функцію асинхронно.
   // Генеруємо випадкове число від 0 до 1
